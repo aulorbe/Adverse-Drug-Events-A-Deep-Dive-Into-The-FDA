@@ -32,7 +32,7 @@ app.layout = html.Div(children=[ # children of entire html page
 
     dcc.Dropdown( # our dropdown menu
         id = 'holiday-drop-down', # id referenced in routes.py function
-        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Christmas', 'New Years']] # options for a list of two items: 'Christmas' and 'New Years'
+        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths Per Holiday', 'Suicides Per Holiday', 'Attempted Suicides Per Holiday']] # options for a list of two items: 'Christmas' and 'New Years'
     )
 
 
@@ -61,9 +61,6 @@ app.layout = html.Div(children=[ # children of entire html page
 
     # html.Div(id='tabs-content')
 
-
-
-
 ])
 
 # @app.callback(
@@ -75,14 +72,39 @@ app.layout = html.Div(children=[ # children of entire html page
 @app.callback(Output('graph-from-dropdown', 'figure'), # output a graph
               [Input('holiday-drop-down', 'value')]) # our function render_content (below) will take as an input a value from the dropdown menu in the dashboard.py file.
 def render_content(value): #we pass in a value from the dropdown menu in dashboard.py
-    if value == 'Christmas': #if the value is 'Christmas', then we create a dictionary of parameters to fill in the graph whose id is 'graph from dropdown' in dashboard.py
+    if value == 'Deaths per holiday': #if the value is 'Christmas', then we create a dictionary of parameters to fill in the graph whose id is 'graph from dropdown' in dashboard.py
+        x = [x[0] for x in db.session.query(Holidays.name).all()]
+        # y = [x[0] for x in ]
         return {'data': [
-                {'x': db.session.query(Holidays.name).all(), 'y': [5, 1, 2], 'type': 'bar', 'name': 'SF'},
-                
+                {'x': x, 'y': [deaths_per_holiday('Christmas'), deaths_per_holiday('Thanksgiving'), deaths_per_holiday('Halloween'), deaths_per_holiday('Independence Day'), deaths_per_holiday('Cinco de Mayo'), deaths_per_holiday('Cannabis Day'), deaths_per_holiday('Mardi Gras'), deaths_per_holiday('Valentine\'s Day'), deaths_per_holiday('New Years Eve')], 'type': 'bar', 'name': 'SF'},
                 ],
         'layout': {
-            'title': 'Dash Data Visualization'
+            'title': 'Deaths per Holiday in 2017'
             }
             }
+    elif value == 'Suicides per holiday':
+
+        x = [x[0] for x in db.session.query(Holidays.name).all()]
+        # y = [x[0] for x in ]
+        return {'data': [
+                {'x': x, 'y': [suicides_per_holiday('Christmas'), suicides_per_holiday('Thanksgiving'), suicides_per_holiday('Halloween'), suicides_per_holiday('Independence Day'), suicides_per_holiday('Cinco de Mayo'), suicides_per_holiday('Cannabis Day'), suicides_per_holiday('Mardi Gras'), suicides_per_holiday('Valentine\'s Day'), suicides_per_holiday('New Years Eve')], 'type': 'bar', 'name': 'SF'},
+                ],
+        'layout': {
+            'title': 'Suicides per holiday'}}
+
+    elif value == 'Attempted Suicides Per Holiday':
+
+        x = [x[0] for x in db.session.query(Holidays.name).all()]
+        # y = [x[0] for x in ]
+        return {'data': [
+                {'x': x, 'y': [attempted_suicides_per_holiday('Christmas'), attempted_suicides_per_holiday('Thanksgiving'), attempted_suicides_per_holiday('Halloween'), attempted_suicides_per_holiday('Independence Day'), attempted_suicides_per_holiday('Cinco de Mayo'), attempted_suicides_per_holiday('Cannabis Day'), attempted_suicides_per_holiday('Mardi Gras'), attempted_suicides_per_holiday('Valentine\'s Day'), attempted_suicides_per_holiday('New Years Eve')], 'type': 'bar', 'name': 'SF'},
+                ],
+        'layout': {
+            'title': 'Attempted Suicides Per Holiday'}}
+
     else:
-        return None # else return nothing (but automatically defaults to outputting a graph because of our decorator so just outputs a blank graph)
+        return None
+
+
+
+        # return None # else return nothing (but automatically defaults to outputting a graph because of our decorator so just outputs a blank graph)

@@ -9,6 +9,8 @@ from flask_sqlalchemy import SQLAlchemy
 from dash_package.__init__ import app, db
 from dash_package.models import *
 from dash_package.dashboard import *
+from dash_package import server
+from dash_package.queries import *
 
 #needed for routes/queries to run
 from sqlalchemy import create_engine, func, or_
@@ -17,8 +19,10 @@ import numpy as np
 import operator
 
 
-
-
+@server.route('/q')
+def render_apartments():
+    listing = deaths_per_holiday('Christmas')
+    return str(listing)
 
 # routes
 # @app.callback(Output('graph-from-dropdown', 'figure'), # output a graph
