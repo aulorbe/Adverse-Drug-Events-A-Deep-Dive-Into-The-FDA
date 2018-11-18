@@ -8,46 +8,56 @@ from dash.dependencies import Input, Output
 
 
 # HOW OUR DASHBOARD WILL LOOK:
-app.layout = html.Div(children=[
-    html.H1(id = 'test , ''Most Deadly Drugs'),
+app.layout = html.Div(children=[ # children of entire html page
+    html.H1('An Exploration of the FDA\'s Adverse Events open API'), # title
 
-    html.Div('''
-        What FDA approved drugs where the deadliest?
-    '''),
-    html.P('lala'),
+    html.Br(), # line breaks
+    html.Br(),
+    html.Br(),
 
     dcc.Graph(
-        id='example-graph',
-        figure={
-            'data': [
-                {'x': [1, 2, 3], 'y': [5, 1, 2], 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-            ],
-            'layout': {
-                'title': 'Dash Data Visualization'
-            }
-        }
-    ),
-
-    html.Label('Multi-Select Dropdown'),
-    dcc.Dropdown(
-            id='class-dropdown',
-            options=[
-                {'label': 'New York City', 'value':'NYC'},
-                {'label': u'Montréal', 'value': 'MTL'}
-                ],
-            value= ['NYC','MTL'],
-            multi=True
+        id='graph-from-dropdown',
+        # figure={
+        #         'data': [
+        #             {'x': [1, 2, 3], 'y': [5, 1, 2], 'type': 'bar', 'name': 'SF'},
+        #             {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+        #         ],
+        #         'layout': {
+        #             'title': 'Dash Data Visualization'
+        #         }
+            # }
             ),
 
+    dcc.Dropdown( # our dropdown menu
+        id = 'holiday-drop-down', # id referenced in routes.py function
+        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Christmas', 'New Years']] # options for a list of two items: 'Christmas' and 'New Years'
+    )
 
 
-    dcc.Tabs(
-        id="tabs", value='tab-1', children=[
-        dcc.Tab(label='Tab one', value='tab-1'),
-        dcc.Tab(label='Tab two', value='tab-2'),
-        ]),
-    html.Div(id='tabs-content')
+    # html.H3('An exploration of the FDA\'s Adverse Events open API'),
+
+    #
+    # dcc.Tabs(
+    #     id="tabs", children=[
+    #         dcc.Tab(id='tab 1', label='Men', children=[
+    #             html.H3(children=''),
+    #             dcc.Graph(id='men-graph',
+    #                 figure={
+    #                     'data': [
+    #                         {'x': [1, 2, 3], 'y': [5, 1, 2], 'type': 'bar', 'name': 'SF'},
+    #                         {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+    #                     ],
+    #                     'layout': {
+    #                         'title': 'Total Adverse Events Effecting Men per 2017 Holiday'
+    #                     }
+    #                 }
+    #             ),
+    #         ]),
+    #         dcc.Tab(label='Tab two', value='tab-2'),
+    #     ]),
+
+
+    # html.Div(id='tabs-content')
 
 
 
