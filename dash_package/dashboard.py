@@ -88,12 +88,12 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
 
 def top_five_reactions_per_holiday(value):
     # if value == 'Top Five Adverse Reactions in 2017':
-    layout = go.Layout(
-        title='Top Five Adverse Reactions in 2017',
-        showlegend=False,
-        margin=go.Margin(l=50, r=50, t=40, b=40)
-    )
     if value == 'Top Five Adverse Reactions in 2017':
+        layout = go.Layout(
+            title='Top Five Adverse Reactions Reported During Adverse Events',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
         pie = go.Pie(
                 labels=[reaction[0] for reaction in top_five_most_common_reactions()],
                 values=[reaction[1] for reaction in top_five_most_common_reactions()],
@@ -101,7 +101,23 @@ def top_five_reactions_per_holiday(value):
                 # hoverinfo='text',
                 textinfo="label+percent"
             )
-    return go.Figure(data=[pie], layout=layout)
+        return go.Figure(data=[pie], layout=layout)
+
+    elif value == 'Top Five Adverse Brands in 2017':
+        layout = go.Layout(
+            title='Top Five Brand Drugs Involved With Adverse Events',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[brand[0] for brand in top_five_most_common_brands()],
+                values=[brand[1] for brand in top_five_most_common_brands()],
+                # text=['title']
+                # hoverinfo='text',
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+
 
 
 
