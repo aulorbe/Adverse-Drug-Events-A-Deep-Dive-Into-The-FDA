@@ -11,7 +11,7 @@ server.config["SQLALCHEMY_ECHO"] = True
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(server)
 
-app = dash.Dash(__name__, server=server, url_base_pathname='/dashboard/')
+app = dash.Dash(__name__, server=server, url_base_pathname='/')
 
 
 from dash_package.models import *

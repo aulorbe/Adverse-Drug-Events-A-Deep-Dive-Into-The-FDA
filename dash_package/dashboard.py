@@ -6,11 +6,11 @@ from dash_package.routes import *
 from dash_package.queries import *
 
 
-christmas = find_total_number_of_events_one_holiday('Christmas')
+# christmas = find_total_number_of_events_one_holiday('Christmas')
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-
+# HOW OUR DASHBOARD WILL LOOK: 
 app.layout = html.Div(children=[
     html.H1(children='Most Deadly Drugs'),
 
