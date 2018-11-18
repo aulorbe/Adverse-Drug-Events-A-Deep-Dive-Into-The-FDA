@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine, func, or_
 from dash_package.models import Adverse_Events, Brands, Brands_Events, Reactions, Reactions_Events, Holidays
 from sqlalchemy.orm import sessionmaker
 import numpy as np

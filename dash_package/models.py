@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, Text, ForeignKey, create_engine
+from sqlalchemy import Column, Integer, Text, ForeignKey, create_engine,or_
 from sqlalchemy.orm import relationship
 import sqlalchemy
 from dash_package import db
