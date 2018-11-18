@@ -4,19 +4,17 @@ import dash_html_components as html
 from dash_package.models import *
 from dash_package.routes import *
 from dash_package.queries import *
+from dash.dependencies import Input, Output
 
 
-# christmas = find_total_number_of_events_one_holiday('Christmas')
-
-# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-# HOW OUR DASHBOARD WILL LOOK: 
+# HOW OUR DASHBOARD WILL LOOK:
 app.layout = html.Div(children=[
-    html.H1(children='Most Deadly Drugs'),
+    html.H1(id = 'test , ''Most Deadly Drugs'),
 
-    html.Div(children='''
+    html.Div('''
         What FDA approved drugs where the deadliest?
     '''),
+    html.P('lala'),
 
     dcc.Graph(
         id='example-graph',
@@ -29,5 +27,34 @@ app.layout = html.Div(children=[
                 'title': 'Dash Data Visualization'
             }
         }
-    )
+    ),
+
+    html.Label('Multi-Select Dropdown'),
+    dcc.Dropdown(
+            id='class-dropdown',
+            options=[
+                {'label': 'New York City', 'value':'NYC'},
+                {'label': u'Montréal', 'value': 'MTL'}
+                ],
+            value= ['NYC','MTL'],
+            multi=True
+            ),
+
+
+
+    dcc.Tabs(
+        id="tabs", value='tab-1', children=[
+        dcc.Tab(label='Tab one', value='tab-1'),
+        dcc.Tab(label='Tab two', value='tab-2'),
+        ]),
+    html.Div(id='tabs-content')
+
+
+
+
 ])
+
+# @app.callback(
+#     Output(component_id = 'example-graph', component_property='options'),
+#     [Input(component_id='test', component_property='value')]
+# def test():
