@@ -7,6 +7,7 @@ from dash_package.__init__ import app, db
 from dash_package.models import *
 from dash_package.routes import *
 from dash_package.queries import *
+import plotly.graph_objs as go
 
 
 # HOW OUR DASHBOARD WILL LOOK:
@@ -19,54 +20,28 @@ app.layout = html.Div(children=[ # children of entire html page
 
     dcc.Graph(
         id='graph-from-dropdown',
-        # figure={
-        #         'data': [
-        #             {'x': [1, 2, 3], 'y': [5, 1, 2], 'type': 'bar', 'name': 'SF'},
-        #             {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-        #         ],
-        #         'layout': {
-        #             'title': 'Dash Data Visualization'
-        #         }
-            # }
             ),
 
     dcc.Dropdown( # our dropdown menu
         id = 'holiday-drop-down', # id referenced in routes.py function
-        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths per holiday', 'Suicides per holiday', 'Attempted Suicides per Holidays']] # options for a list of two items: 'Christmas' and 'New Years'
-    )
+        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths per holiday', 'Suicides per holiday', 'Attempted Suicides per Holidays']],
+        value='Deaths per holiday'
+         # options for a list of two items: 'Christmas' and 'New Years'
+    ),
+
+    dcc.Dropdown( # our dropdown menu
+        id = 'top-five-reactions-drop-down', # id referenced in routes.py function
+        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Adverse Reactions in 2017', 'Top Five Adverse Brands in 2017']],
+        value='Top Five Adverse Reactions in 2017'
+    ),
+
+    dcc.Graph(
+        id='top-five-reactions-pie',
+        # value = 'Top Five Adverse Reactions in 2017'
+            )
+    ])
 
 
-    # html.H3('An exploration of the FDA\'s Adverse Events open API'),
-
-    #
-    # dcc.Tabs(
-    #     id="tabs", children=[
-    #         dcc.Tab(id='tab 1', label='Men', children=[
-    #             html.H3(children=''),
-    #             dcc.Graph(id='men-graph',
-    #                 figure={
-    #                     'data': [
-    #                         {'x': [1, 2, 3], 'y': [5, 1, 2], 'type': 'bar', 'name': 'SF'},
-    #                         {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-    #                     ],
-    #                     'layout': {
-    #                         'title': 'Total Adverse Events Effecting Men per 2017 Holiday'
-    #                     }
-    #                 }
-    #             ),
-    #         ]),
-    #         dcc.Tab(label='Tab two', value='tab-2'),
-    #     ]),
-
-
-    # html.Div(id='tabs-content')
-
-])
-
-# @app.callback(
-#     Output(component_id = 'example-graph', component_property='options'),
-#     [Input(component_id='test', component_property='value')]
-# def test():
 
 
 @app.callback(Output('graph-from-dropdown', 'figure'), # output a graph
@@ -104,6 +79,29 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
 
     else:
         return None
+
+
+
+
+@app.callback(Output('top-five-reactions-pie', 'figure'),
+    [Input('top-five-reactions-drop-down', 'value')])
+
+def top_five_reactions_per_holiday(value):
+    # if value == 'Top Five Adverse Reactions in 2017':
+    layout = go.Layout(
+        title='Top Five Adverse Reactions in 2017',
+        showlegend=False,
+        margin=go.Margin(l=50, r=50, t=40, b=40)
+    )
+    if value == 'Top Five Adverse Reactions in 2017':
+        pie = go.Pie(
+                labels=[reaction[0] for reaction in top_five_most_common_reactions()],
+                values=[reaction[1] for reaction in top_five_most_common_reactions()],
+                # text=['title']
+                # hoverinfo='text',
+                textinfo="label+percent"
+            )
+    return go.Figure(data=[pie], layout=layout)
 
 
 
