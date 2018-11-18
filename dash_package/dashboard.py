@@ -32,7 +32,7 @@ app.layout = html.Div(children=[ # children of entire html page
 
     dcc.Dropdown( # our dropdown menu
         id = 'holiday-drop-down', # id referenced in routes.py function
-        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths per holiday', 'Suicides per holiday', 'Attempted Suicides']] # options for a list of two items: 'Christmas' and 'New Years'
+        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths per holiday', 'Suicides per holiday', 'Attempted Suicides per Holidays']] # options for a list of two items: 'Christmas' and 'New Years'
     )
 
 
@@ -92,7 +92,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
         'layout': {
             'title': 'Suicides per holiday'}}
 
-    elif value == 'Attempted Suicides':
+    elif value == 'Attempted Suicides per Holidays':
 
         x = [x[0] for x in db.session.query(Holidays.name).all()]
         # y = [x[0] for x in ]
@@ -100,7 +100,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 {'x': x, 'y': [attempted_suicides_per_holiday('Christmas'), attempted_suicides_per_holiday('Thanksgiving'), attempted_suicides_per_holiday('Halloween'), attempted_suicides_per_holiday('Independence Day'), attempted_suicides_per_holiday('Cinco de Mayo'), attempted_suicides_per_holiday('Cannabis Day'), attempted_suicides_per_holiday('Mardi Gras'), attempted_suicides_per_holiday('Valentine\'s Day'), attempted_suicides_per_holiday('New Years Eve')], 'type': 'bar', 'name': 'SF'},
                 ],
         'layout': {
-            'title': 'Attempted Suicides'}}
+            'title': 'Attempted Suicides per Holidays'}}
 
     else:
         return None
