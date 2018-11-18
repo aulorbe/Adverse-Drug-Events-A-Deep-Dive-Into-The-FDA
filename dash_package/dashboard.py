@@ -61,9 +61,6 @@ app.layout = html.Div(children=[ # children of entire html page
 
     # html.Div(id='tabs-content')
 
-
-
-
 ])
 
 # @app.callback(
@@ -76,12 +73,12 @@ app.layout = html.Div(children=[ # children of entire html page
               [Input('holiday-drop-down', 'value')]) # our function render_content (below) will take as an input a value from the dropdown menu in the dashboard.py file.
 def render_content(value): #we pass in a value from the dropdown menu in dashboard.py
     if value == 'Christmas': #if the value is 'Christmas', then we create a dictionary of parameters to fill in the graph whose id is 'graph from dropdown' in dashboard.py
+        x = [x[0] for x in db.session.query(Holidays.name).all()]
         return {'data': [
-                {'x': db.session.query(Holidays.name).all(), 'y': [5, 1, 2], 'type': 'bar', 'name': 'SF'},
-                
+                {'x': x, 'y': [5, 1, 2, 1, 1, 1, 1, 1, 1], 'type': 'bar', 'name': 'SF'},
                 ],
         'layout': {
-            'title': 'Dash Data Visualization'
+            'title': 'Deaths per Holiday, 2017'
             }
             }
     else:
