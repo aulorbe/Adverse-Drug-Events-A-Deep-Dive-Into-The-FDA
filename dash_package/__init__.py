@@ -1,3 +1,4 @@
+
 from flask import Flask
 
 import dash
@@ -9,11 +10,16 @@ server.config["SQLALCHEMY_ECHO"] = True
 
 
 from flask_sqlalchemy import SQLAlchemy
+
+
+
 db = SQLAlchemy(server)
+
 
 app = dash.Dash(__name__, server=server, url_base_pathname='/')
 
 
-from dash_package.models import *
+
+from dash_package.dashboard import *
 from dash_package.routes import *
 from dash_package.dashboard import *

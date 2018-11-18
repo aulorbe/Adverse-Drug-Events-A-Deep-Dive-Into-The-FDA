@@ -1,15 +1,17 @@
 from sqlalchemy import create_engine, func, or_
-from dash_package.models import Adverse_Events, Brands, Brands_Events, Reactions, Reactions_Events, Holidays
+from dash_package import app,db
 from sqlalchemy.orm import sessionmaker
 import numpy as np
 import operator
-from dash_package import db
+from dash_package.models import Adverse_Events, Brands, Brands_Events, Reactions, Reactions_Events, Holidays
 
 
 
-# engine = create_engine('sqlite:///adverse-events.db', echo=False)
-# Session = sessionmaker(bind=engine)
-# session = Session()
+
+
+engine = create_engine('sqlite:///adverse-events.db', echo=False)
+Session = sessionmaker(bind=engine)
+session = Session()
 
 
 def find_total_number_of_events_one_holiday(holiday): # format of holiday input = 'Christmas' format

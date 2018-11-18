@@ -1,10 +1,12 @@
-from dash_package import app
 import dash_core_components as dcc
 import dash_html_components as html
+
+from dash.dependencies import Input, Output
+
+from dash_package.__init__ import app, db
 from dash_package.models import *
 from dash_package.routes import *
 from dash_package.queries import *
-from dash.dependencies import Input, Output
 
 
 # HOW OUR DASHBOARD WILL LOOK:
@@ -68,3 +70,19 @@ app.layout = html.Div(children=[ # children of entire html page
 #     Output(component_id = 'example-graph', component_property='options'),
 #     [Input(component_id='test', component_property='value')]
 # def test():
+
+
+@app.callback(Output('graph-from-dropdown', 'figure'), # output a graph
+              [Input('holiday-drop-down', 'value')]) # our function render_content (below) will take as an input a value from the dropdown menu in the dashboard.py file.
+def render_content(value): #we pass in a value from the dropdown menu in dashboard.py
+    if value == 'Christmas': #if the value is 'Christmas', then we create a dictionary of parameters to fill in the graph whose id is 'graph from dropdown' in dashboard.py
+        return {'data': [
+                {'x': db.session.query(Holidays.name).all(), 'y': [5, 1, 2], 'type': 'bar', 'name': 'SF'},
+                
+                ],
+        'layout': {
+            'title': 'Dash Data Visualization'
+            }
+            }
+    else:
+        return None # else return nothing (but automatically defaults to outputting a graph because of our decorator so just outputs a blank graph)

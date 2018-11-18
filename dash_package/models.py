@@ -2,7 +2,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, ForeignKey, create_engine,or_
 from sqlalchemy.orm import relationship
 import sqlalchemy
-from dash_package import db
+from dash_package.__init__ import db
 # Base = declarative_base()
 
 class Adverse_Events(db.Model): #association table
