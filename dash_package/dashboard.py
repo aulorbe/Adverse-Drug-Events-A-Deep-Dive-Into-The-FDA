@@ -16,16 +16,20 @@ import dash_table
 # HOW OUR DASHBOARD WILL LOOK:
 app.layout = html.Div(id='main', children = [
     html.H1('Beyond The FDA: Drug-Related Adverse Events in 2017'),
-    # html.Strong(html.H3 ('Introduction')),
+
+    # INTRODUCTORY TEXT
     html.P('This web application allows users to explore a database comprising of adverse event information across select holidays in 2017. Everything in the database was gathered by querying the FDA\'s API Drug Adverse Event endpoint.'),
     html.Br(),
     html.Br(),
 
+    # STARTING TABS SECTION
     dcc.Tabs(id="tabs", children=[
 
+        # TAB 1
         dcc.Tab(id='Tab 1', label='Individual Holidays Statistics', children=[
             html.Br(),
 
+            # DATA TABLE
             dash_table.DataTable(
                 id='holiday_stats',
                 columns=[{'name': 'Male', 'id': 'col-male'}, {'name': 'Female', 'id': 'col-female'}, {'name': 'Adverse Events', 'id': 'col-events'}],
@@ -37,11 +41,23 @@ app.layout = html.Div(id='main', children = [
                 ),
 
 
+            html.Br(),
+            dcc.Graph(
+                id='top-five-brands-per-holiday-pie',
+                # value = 'xmas'
+                    ),
+            html.Br(),
+            dcc.Graph(
+                id='top-five-reactions-per-holiday-pie',
+                # value = 'xmas'
+                    ),
 
             html.Br(),
+            # DATA TABLE INSTRUCTIONS
             html.P('Pick a holiday from the menu below and its stats will appear in the table above.'),
             html.Br(),
 
+            # DROP DOWN TO POPULATE DATA TABLE
             dcc.Dropdown(
                 id='stats-dropdown',
                 options=[
@@ -59,15 +75,21 @@ app.layout = html.Div(id='main', children = [
                 ),
             ]),
 
+        # TAB 2
         dcc.Tab(id='Tab 2', label='Top 5 Brands & Drugs Associated With Adverse Events Across All Holidays', children=[
             # html.H1(children='Drug Related Adverse Events'),
             html.Br(),
+
+            # PIE CHART
             dcc.Graph(
                 id='top-five-reactions-pie',
                 # value = 'Top Five Adverse Reactions in 2017'
                     ),
+            # PIE CHART INSTRUCTIONS
             html.P('Pick a category from the menu below and the breakdown will appear above.'),
             html.Br(),
+
+            # DROP DOWN MENU FOR PIE CHART
             dcc.Dropdown( # our dropdown menu
                 id = 'top-five-reactions-drop-down', # id referenced in routes.py function
                 options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Adverse Reactions in 2017', 'Top Five Adverse Brands in 2017']],
@@ -75,13 +97,20 @@ app.layout = html.Div(id='main', children = [
             )
         ]),
 
+        # TAB 3
         dcc.Tab(id='Tab 3', label='Deaths and Suicides Across All Holidays', children=[
             # html.H3(children='Deaths and Suicides per Holiday'),
+
+            # BAR CHART
             dcc.Graph(
                 id='graph-from-dropdown',
                     ),
+
+            # BAR CHART INSTRUCTIONS
             html.P('Pick a category from the menu below and its stats will appear in the chart above.'),
             html.Br(),
+
+            # DROP DOWN FOR BAR CHART
             dcc.Dropdown( # our dropdown menu
                 id = 'holiday-drop-down', # id referenced in routes.py function
                 options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths per Holiday', 'Suicides per Holiday', 'Attempted Suicides per Holiday']],
@@ -90,26 +119,10 @@ app.layout = html.Div(id='main', children = [
             html.Br(),
 
         ]),
-
-        dcc.Tab(id='Tab 4', label='Top 5 Brands Per Holiday', children=[
-            # html.H1(children='Drug Related Adverse Events'),
-            html.Br(),
-            dcc.Graph(
-                id='top-five-reactions-per-holiday-pie',
-                # value = 'Top Five Adverse Reactions in 2017'
-                    ),
-            html.P('Pick a category from the menu below and the breakdown will appear above.'),
-            html.Br(),
-            dcc.Dropdown( # our dropdown menu
-                id = 'top-five-reactions-per-holiday-drop-down', # id referenced in routes.py function
-                options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Brands in Christmas', 'Top Five Brands in Thanksgiving', 'Top Five Brands in Halloween', 'Top Five Brands in New Years Eve', 'Top Five Brands in Valentine\'s Day', 'Top Five Brands in Mardi Gras', 'Top Five Brands in Cannabis Day', 'Top Five Brands in Cinco de Mayo', 'Top Five Brands in Independence Day']], #, 'Top Five Brands in Thanksgiving', 'Top Five Brands in Halloween', 'Top Five Brands in New Years Eve', 'Top Five Brands in Valentine\'s Day', 'Top Five Brands in Mardi Gras', 'Top Five Brands in Cannabis Day', 'Top Five Brands in Cinco de Mayo', 'Top Five Brands in Independence Day'
-                value='Top Five Brands in Christmas'
-            )
-        ])
     ])
 ])
 
-
+# CALL BACKS / QUERIES
 @app.callback(Output('holiday_stats', 'data'),
                 [Input('stats-dropdown', 'value')])
 def sex_stats_per_holiday(value):
@@ -173,7 +186,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
 @app.callback(Output('top-five-reactions-pie', 'figure'),
     [Input('top-five-reactions-drop-down', 'value')])
 
-def top_five_reactions_per_holiday(value):
+def top_five_reactions_across_holidays(value):
     # if value == 'Top Five Adverse Reactions in 2017':
     if value == 'Top Five Adverse Reactions in 2017':
         layout = go.Layout(
@@ -206,134 +219,114 @@ def top_five_reactions_per_holiday(value):
         return go.Figure(data=[pie], layout=layout)
 
 
-@app.callback(Output('top-five-reactions-per-holiday-pie', 'figure'),
-    [Input('top-five-reactions-per-holiday-drop-down', 'value')])
-
+@app.callback(Output('top-five-brands-per-holiday-pie', 'figure'),
+    [Input('stats-dropdown', 'value')])
 def top_five_reactions_per_holiday(value):
-    # if value == 'Top Five Adverse Reactions in 2017':
-    if value == 'Top Five Brands in Christmas':
+    if value == 'xmas':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for Christmas 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('Christmas')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('Christmas')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
-    elif value == 'Top Five Brands in Thanksgiving':
+    elif value == 'tkgiving':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for Thanksgiving 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('Thanksgiving')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('Thanksgiving')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
-    elif value == 'Top Five Brands in Halloween':
+    elif value == 'halloween':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for Halloween 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('Halloween')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('Halloween')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
-    elif value == 'Top Five Brands in New Years Eve':
+    elif value == 'NYE':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for New Years Eve 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('New Years Eve')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('New Years Eve')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
-    elif value == 'Top Five Brands in Valentine\'s Day':
+    elif value == 'vday':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for Valentine\'s Day 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('Valentine\'s Day')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('Valentine\'s Day')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
-    elif value == 'Top Five Brands in Mardi Gras':
+    elif value == 'mardigras':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for Mardi Gras 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('Mardi Gras')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('Mardi Gras')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
-    elif value == 'Top Five Brands in Cannabis Day':
+    elif value == '420':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for Cannabis Day 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('Cannabis Day')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('Cannabis Day')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
-    elif value == 'Top Five Brands in Cinco de Mayo':
+    elif value == 'cinco':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for Cinco de Mayo 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('Cinco de Mayo')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('Cinco de Mayo')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
-    elif value == 'Top Five Brands in Independence Day':
+    elif value == 'fourth':
         layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            title='Top Five Brand Drugs Associated with Adverse Events for Independence Day 2017',
             showlegend=False,
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
                 labels=[reaction for reaction in top_five_brands_names_in_one_holiday('Independence Day')],
                 values=[reaction for reaction in top_five_brands_count_in_one_holiday('Independence Day')],
-                # text=['title']
-                # hoverinfo='text',
                 textinfo="label+percent"
             )
         return go.Figure(data=[pie], layout=layout)
@@ -341,6 +334,117 @@ def top_five_reactions_per_holiday(value):
         return None
 
 
-
-
-        # return None # else return nothing (but automatically defaults to outputting a graph because of our decorator so just outputs a blank graph)
+# INDIVIDUAL HOLIDAY REACTIONS PIES
+@app.callback(Output('top-five-reactions-per-holiday-pie', 'figure'),
+    [Input('stats-dropdown', 'value')])
+def top_five_reactions_per_holiday(value):
+    if value == 'xmas':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for Christmas 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Christmas')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Christmas')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    elif value == 'tkgiving':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for Thanksgiving 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Thanksgiving')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Thanksgiving')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    elif value == 'halloween':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for Halloween 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Halloween')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Halloween')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    elif value == 'NYE':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for New Years Eve 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('New Years Eve')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('New Years Eve')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    elif value == 'vday':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for Valentine\'s Day 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Valentine\'s Day')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Valentine\'s Day')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    elif value == 'mardigras':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for Mardi Gras 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Mardi Gras')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Mardi Gras')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    elif value == '420':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for Cannabis Day 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Cannabis Day')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Cannabis Day')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    elif value == 'cinco':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for Cinco de Mayo 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Cinco de Mayo')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Cinco de Mayo')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    elif value == 'fourth':
+        layout = go.Layout(
+            title='Top Five Reactions Reported During Adverse Events for Independence Day 2017',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Independence Day')],
+                values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Independence Day')],
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    else:
+        return None
