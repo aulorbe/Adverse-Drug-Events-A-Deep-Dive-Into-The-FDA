@@ -20,9 +20,8 @@ import operator
 
 
 @server.route('/q')
-def deaths_per_holiday(holiday):
-    return jsonify(db.session.query(Reactions.name).join(Reactions_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday,
-    or_(Reactions.name=='Death', Reactions.name=='Sudden death')).all())
+def deaths_per_holiday():
+    return str(find_count_of_brands_in_one_holiday('Christmas'))
 
 
     # return len(db.session.query(Adverse_Events.sex).filter(Adverse_Events.sex == 1).all())

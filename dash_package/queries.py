@@ -14,7 +14,8 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 def find_total_number_of_events_one_holiday(holiday): # format of holiday input = 'Christmas' format
-    return db.session.query(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
+    all = db.session.query(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
+    return len(all)
 
 
 def male_events_in_one_holiday(holiday): # format of holiday input = 'Christmas' format
