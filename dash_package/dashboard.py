@@ -20,11 +20,11 @@ app.layout = html.Div(id='main', children = [
 
 
     # INTRODUCTORY TEXT
-    html.P('This web application allows users to explore the adverse events reported to the FDA across select holidays in 2017. An adverse event is any symptom that occurs while taking a drug, which may or may not have been caused by the drug. Everything in the database was gathered by querying the FDA\'s API Drug Adverse Events endpoint.'),
+    html.P('This web application allows users to explore the adverse events reported to the FDA across select holidays in 2017. An adverse event is any symptom that occurs while taking a drug, which may or may not have been caused by the drug. Everything in the database was gathered by querying the FDA\'s openFDA drug adverse event API.'),
     html.P(html.Strong('Some observations of note:'),),
     html.Ul(children=[
         html.Li('The holiday with highest number of adverse events reported to the FDA was Cannabis Day (5,242).'),
-        html.Li('Across all the holidays in this dataset, men made up 40.86% of total adverse events, while women made up 59.14% of total adverse events. We plan to do a gender analysis at a later point.')
+        html.Li('Across all the holidays in this dataset, men made up 40.86% of total adverse events, while women made up 59.14% of total adverse events. We plan to do an age analysis at a later point.')
         ]
         ),
     html.P(html.Strong('Some questions we tried to answer with our app include:'),),
@@ -40,7 +40,7 @@ app.layout = html.Div(id='main', children = [
     dcc.Tabs(id="tabs", children=[
 
         # TAB 1
-        dcc.Tab(id='Tab 1', label='Individual Holidays Statistics', children=[
+        dcc.Tab(id='Tab 1', label='Individual Holiday Statistics', children=[
             html.Br(),
 
             html.P('Pick a holiday from the menu below and its stats will appear below.'),
