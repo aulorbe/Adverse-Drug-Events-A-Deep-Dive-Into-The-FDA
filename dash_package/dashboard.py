@@ -29,6 +29,27 @@ app.layout = html.Div(id='main', children = [
         dcc.Tab(id='Tab 1', label='Individual Holidays Statistics', children=[
             html.Br(),
 
+            html.P('Pick a holiday from the menu below and its stats will appear below.'),
+            html.Br(),
+
+            # DROP DOWN TO POPULATE DATA TABLE
+            dcc.Dropdown(
+                id='stats-dropdown',
+                options=[
+                    {'label': 'Christmas', 'value': 'xmas'},
+                    {'label': 'Thanksgiving', 'value': 'tkgiving'},
+                    {'label': 'Halloween', 'value': 'halloween'},
+                    {'label': 'New Years Eve', 'value': 'NYE'},
+                    {'label': 'Valentine\'s Day', 'value': 'vday'},
+                    {'label': 'Mardi Gras', 'value': 'mardigras'},
+                    {'label': 'Cannabis Day', 'value': '420'},
+                    {'label': 'Cinco de Mayo', 'value': 'cinco'},
+                    {'label': 'Independence Day', 'value': 'fourth'},
+                ],
+                value="xmas",
+                ),
+            html.Br(),
+            html.Br(),
             # DATA TABLE
             dash_table.DataTable(
                 id='holiday_stats',
@@ -54,25 +75,7 @@ app.layout = html.Div(id='main', children = [
 
             html.Br(),
             # DATA TABLE INSTRUCTIONS
-            html.P('Pick a holiday from the menu below and its stats will appear in the table above.'),
-            html.Br(),
 
-            # DROP DOWN TO POPULATE DATA TABLE
-            dcc.Dropdown(
-                id='stats-dropdown',
-                options=[
-                    {'label': 'Christmas', 'value': 'xmas'},
-                    {'label': 'Thanksgiving', 'value': 'tkgiving'},
-                    {'label': 'Halloween', 'value': 'halloween'},
-                    {'label': 'New Years Eve', 'value': 'NYE'},
-                    {'label': 'Valentine\'s Day', 'value': 'vday'},
-                    {'label': 'Mardi Gras', 'value': 'mardigras'},
-                    {'label': 'Cannabis Day', 'value': '420'},
-                    {'label': 'Cinco de Mayo', 'value': 'cinco'},
-                    {'label': 'Independence Day', 'value': 'fourth'},
-                ],
-                value="xmas",
-                ),
             ]),
 
         # TAB 2
