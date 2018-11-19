@@ -23,7 +23,7 @@ app.layout = html.Div(id='main', children = [
 
     dcc.Tabs(id="tabs", children=[
 
-        dcc.Tab(id='Tab 3', label='Individual Holidays Statistics', children=[
+        dcc.Tab(id='Tab 1', label='Individual Holidays Statistics', children=[
             html.Br(),
 
             dash_table.DataTable(
@@ -75,7 +75,7 @@ app.layout = html.Div(id='main', children = [
             )
         ]),
 
-        dcc.Tab(id='Tab 1', label='Deaths and Suicides Across All Holidays', children=[
+        dcc.Tab(id='Tab 3', label='Deaths and Suicides Across All Holidays', children=[
             # html.H3(children='Deaths and Suicides per Holiday'),
             dcc.Graph(
                 id='graph-from-dropdown',
@@ -90,6 +90,22 @@ app.layout = html.Div(id='main', children = [
             html.Br(),
 
         ]),
+
+        dcc.Tab(id='Tab 4', label='Top 5 Brands Per Holiday', children=[
+            # html.H1(children='Drug Related Adverse Events'),
+            html.Br(),
+            dcc.Graph(
+                id='top-five-reactions-per-holiday-pie',
+                # value = 'Top Five Adverse Reactions in 2017'
+                    ),
+            html.P('Pick a category from the menu below and the breakdown will appear above.'),
+            html.Br(),
+            dcc.Dropdown( # our dropdown menu
+                id = 'top-five-reactions-per-holiday-drop-down', # id referenced in routes.py function
+                options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Adverse Reactions in 2017', 'Top Five Adverse Brands in 2017']],
+                value='Top Five Adverse Reactions in 2017'
+            )
+        ])
     ])
 ])
 
