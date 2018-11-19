@@ -17,7 +17,7 @@ import dash_table
 app.layout = html.Div(id='main', children = [
     html.H1('Beyond The FDA: Drug-Related Adverse Events in 2017'),
     # html.Strong(html.H3 ('Introduction')),
-    html.P('This web application allows users to explore a database comprising of adverse event information across select holidays in 2017. Everything in the database was gathered by querying the FDA\'s API Drug Adverse Event endpoint.'),
+    html.P('This web application allows users to explore a database comprising of adverse event information across select holidays in 2017. The database was made with information from the FDA\'s API Drug Adverse Event endpoint.'),
     html.Br(),
     html.Br(),
 
@@ -52,10 +52,20 @@ app.layout = html.Div(id='main', children = [
 
         dcc.Tab(id='Tab 3', label='Holidays Stats', children=[
             html.Br(),
-            html.P('Pick a holiday from the menu below and its stats will appear in the table.'),
+
+            dash_table.DataTable(
+                id='sex-table',
+                columns=[{'name': 'Male', 'id': 'col-male'}, {'name': 'Female', 'id': 'col-female'}],
+                style_header={
+                                 'backgroundColor': '#FDEAEA',
+                                 'fontWeight': 'bold',
+                                 'color': 'black'
+                                 }
+                ),
 
             html.Br(),
             html.Br(),
+<<<<<<< HEAD
 
             dash_table.DataTable(
             id='holiday_stats',
@@ -66,7 +76,11 @@ app.layout = html.Div(id='main', children = [
                              'color': 'black'
                              }
             ),
+=======
+            html.P('Pick a holiday from the dropdown menu below to see the breakdown of men v. women for that particular date.'),
+>>>>>>> 51cc2a3ff27e0a9e4660df81e8b5911be707c9d1
             html.Br(),
+
             dcc.Dropdown(
                 id='stats-dropdown',
                 options=[
