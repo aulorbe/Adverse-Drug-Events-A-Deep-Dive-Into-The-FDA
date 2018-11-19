@@ -16,10 +16,13 @@ import dash_table
 # HOW OUR DASHBOARD WILL LOOK:
 app.layout = html.Div(id='main', children = [
     html.H1('Beyond The FDA: Drug-Related Adverse Events in 2017'),
+    html.Br(),
+
 
     # INTRODUCTORY TEXT
-    html.P('This web application allows users to explore a database comprising of adverse event information across select holidays in 2017. Everything in the database was gathered by querying the FDA\'s API Drug Adverse Event endpoint.'),
-    html.Br(),
+    html.P('This web application allows users to explore a database comprising of adverse event information across select holidays in 2017. An adverse event is a drug related event that resulted the user to visit a hospital. Everything in the database was gathered by querying the FDA\'s API Drug Adverse Event endpoint.'),
+    html.P('Each holiday has a sample size of drug related adverse events. The holiday with the largest sample size of adverse events from the FDA API was Cannabis Day with 5242 reported adverse events. Men make up 40.86% of total events, while women make up 59.14% of total events.'),
+    html.P('What were the most common drugs throughout the holidays? What were the most common reactions? Which holidays had the most deaths, suicides and attempted suicides? Below is the analysis of adverse events of the holidays that help answer these questions:'),
     html.Br(),
 
     # STARTING TABS SECTION
@@ -122,6 +125,37 @@ app.layout = html.Div(id='main', children = [
             html.Br(),
 
         ]),
+        #Men Vs Women
+        dcc.Tab(id='Tab 4', label='Gender Analysis', children=[
+            # html.H3(children='Deaths and Suicides per Holiday'),
+
+            # BAR CHART
+            dcc.Graph(
+                id='gender-graph-from-dropdown'
+                    ),
+
+            # BAR CHART INSTRUCTIONS
+            html.P('Pick a category from the menu below and its stats will appear in the chart above.'),
+            html.Br(),
+
+            # DROP DOWN FOR BAR CHART
+            dcc.Dropdown( # our dropdown menu
+                id = 'gender-holiday-drop-down', # id referenced in routes.py function
+                options=[
+                    {'label': 'Christmas', 'value': 'xmas'},
+                    {'label': 'Thanksgiving', 'value': 'tkgiving'},
+                    {'label': 'Halloween', 'value': 'halloween'},
+                    {'label': 'New Years Eve', 'value': 'NYE'},
+                    {'label': 'Valentine\'s Day', 'value': 'vday'},
+                    {'label': 'Mardi Gras', 'value': 'mardigras'},
+                    {'label': 'Cannabis Day', 'value': '420'},
+                    {'label': 'Cinco de Mayo', 'value': 'cinco'},
+                    {'label': 'Independence Day', 'value': 'fourth'},
+                ],
+                value='xmas'
+                    ),
+            html.Br(),
+        ])
     ])
 ])
 
@@ -451,3 +485,101 @@ def top_five_reactions_per_holiday(value):
         return go.Figure(data=[pie], layout=layout)
     else:
         return None
+
+
+@app.callback(Output('gender-graph-from-dropdown', 'figure'), # output a graph
+              [Input('gender-holiday-drop-down', 'value')]) # our function render_content (below) will take as an input a value from the dropdown menu in the dashboard.py file.
+def render_content(value): #we pass in a value from the dropdown menu in dashboard.py
+    # f = 'Female Events'
+    # m = 'Male Events'
+    if value == 'xmas': #if the value is 'Christmas', then we create a dictionary of parameters to fill in the graph whose id is 'graph from dropdown' in dashboard.py
+        # y = [x[0] for x in ]
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('Christmas')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('Christmas')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+    elif value == 'tkgiving':
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('Thanksgiving')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('Thanksgiving')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+    elif value == 'halloween':
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('Halloween')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('Halloween')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+    elif value == 'NYE':
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('New Years Eve')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('New Years Eve')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+    elif value == 'vday':
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('Valentine\'s Day')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('Valentine\'s Day')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+    elif value == 'mardigras':
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('Mardi Gras')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('Mardi Gras')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+    elif value == '420':
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('Cannabis Day')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('Cannabis Day')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+    elif value == 'cinco':
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('Cinco de Mayo')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('Cinco de Mayo')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+    elif value == 'fourth':
+        return {'data': [
+                {'x': ['Female Events'], 'y': [female_events_in_one_holiday('Independence Day')], 'type': 'bar'},
+                {'x': ['Male Events'], 'y': [male_events_in_one_holiday('Independence Day')], 'type': 'bar'}
+                ],
+        'layout': {
+            'title': 'Gender Analysis per Holiday',
+            }
+            }
+
+    else:
+        return None
+
+
+
+
+{'label': 'Cinco de Mayo', 'value': 'cinco'},
+{'label': 'Independence Day', 'value': 'fourth'}

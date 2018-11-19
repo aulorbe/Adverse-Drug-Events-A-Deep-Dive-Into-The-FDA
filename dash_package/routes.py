@@ -21,7 +21,7 @@ import operator
 
 @server.route('/q')
 def render_view():
-    hello = top_five_reaction_names_in_one_holiday('Christmas')
+    hello = percent_men_and_women_across_all_events()
     return str(hello) #gets brand names only
 
 
