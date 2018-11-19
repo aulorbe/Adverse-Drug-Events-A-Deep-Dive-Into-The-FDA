@@ -1,3 +1,4 @@
+import dash
 import dash_core_components as dcc
 import dash_html_components as html
 
@@ -8,13 +9,23 @@ from dash_package.models import *
 from dash_package.routes import *
 from dash_package.queries import *
 import plotly.graph_objs as go
+import dash_table
+
 
 
 # HOW OUR DASHBOARD WILL LOOK:
-app.layout = html.Div(
+app.layout = html.Div(id='main', children = [
+    html.H1('Beyond The FDA: Drug-Related Adverse Events in 2017'),
+    # html.Strong(html.H3 ('Introduction')),
+    html.P('This web application allows users to explore a database comprising of adverse event information across select holidays in 2017. Everything in the database was gathered by querying the FDA\'s API Drug Adverse Event endpoint.'),
+    html.Br(),
+    html.Br(),
+
+
     dcc.Tabs(id="tabs", children=[
+
         dcc.Tab(id='Tab 1', label='Deaths and Suicides', children=[
-            html.H1(children='Deaths and Suicides per Holiday'),
+            # html.H3(children='Deaths and Suicides per Holiday'),
             dcc.Graph(
                 id='graph-from-dropdown',
                     ),
@@ -23,8 +34,10 @@ app.layout = html.Div(
                 options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths per holiday', 'Suicides per holiday', 'Attempted Suicides per Holidays']],
                 value='Deaths per holiday'
                     )]),
+
         dcc.Tab(id='Tab 2', label='Drugs Analysis', children=[
-            html.H1(children='Drug Related Adverse Events'),
+            # html.H1(children='Drug Related Adverse Events'),
+            html.Br(),
             dcc.Graph(
                 id='top-five-reactions-pie',
                 # value = 'Top Five Adverse Reactions in 2017'
@@ -34,10 +47,41 @@ app.layout = html.Div(
                 options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Adverse Reactions in 2017', 'Top Five Adverse Brands in 2017']],
                 value='Top Five Adverse Reactions in 2017'
             )
-    ])
-    ])
-    )
+        ]),
 
+        dcc.Tab(id='Tab 3', label='Sex Breakdown', children=[
+            html.Br(),
+            html.P('Pick a holiday from the menu below and its stats will appear in the table.'),
+            html.Br(),
+            dcc.Dropdown(
+                id='sex-dropdown',
+                options=[
+                    {'label': 'Christmas', 'value': 'xmas'},
+                    {'label': 'Thanksgiving', 'value': 'tkgiving'},
+                    {'label': 'Halloween', 'value': 'halloween'}
+                ],
+                multi=True,
+                value="xmas"
+                ),
+
+            html.Br(),
+            html.Br(),
+
+            dash_table.DataTable(
+            id='sex-table',
+            columns=[{'name': 'Male', 'id': 'col-male'}, {'name': 'Female', 'id': 'col-female'}],
+            data=[{'col-male': 9, 'col-female': 10}]
+            )
+        ])
+
+    ])
+
+])
+
+# @app.callback(Output('sex-table', 'figure'),
+#                 [Input('sex-dropdown', 'value')])
+# def sex_stats_per_holiday(value):
+#     pass
 
 
 
