@@ -91,21 +91,21 @@ app.layout = html.Div(id='main', children = [
 
         ]),
 
-        dcc.Tab(id='Tab 4', label='Top 5 Brands Per Holiday', children=[
-            # html.H1(children='Drug Related Adverse Events'),
-            html.Br(),
-            dcc.Graph(
-                id='top-five-reactions-per-holiday-pie',
-                # value = 'Top Five Adverse Reactions in 2017'
-                    ),
-            html.P('Pick a category from the menu below and the breakdown will appear above.'),
-            html.Br(),
-            dcc.Dropdown( # our dropdown menu
-                id = 'top-five-reactions-per-holiday-drop-down', # id referenced in routes.py function
-                options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Brands in Christmas', 'Top Five Brands in Thanksgiving', 'Top Five Brands in Halloween', 'Top Five Brands in New Years Eve', 'Top Five Brands in Valentine\'s Day', 'Top Five Brands in Mardi Gras', 'Top Five Brands in Cannabis Day', 'Top Five Brands in Cinco de Mayo', 'Top Five Brands in Independence Day']],
-                value='Top Five Brands Per Holiday'
-            )
-        ])
+        # dcc.Tab(id='Tab 4', label='Top 5 Brands Per Holiday', children=[
+        #     # html.H1(children='Drug Related Adverse Events'),
+        #     html.Br(),
+        #     dcc.Graph(
+        #         id='top-five-reactions-per-holiday-pie',
+        #         # value = 'Top Five Adverse Reactions in 2017'
+        #             ),
+        #     html.P('Pick a category from the menu below and the breakdown will appear above.'),
+        #     html.Br(),
+        #     dcc.Dropdown( # our dropdown menu
+        #         id = 'top-five-reactions-per-holiday-drop-down', # id referenced in routes.py function
+        #         options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Brands in Christmas', 'Top Five Brands in Thanksgiving', 'Top Five Brands in Halloween', 'Top Five Brands in New Years Eve', 'Top Five Brands in Valentine\'s Day', 'Top Five Brands in Mardi Gras', 'Top Five Brands in Cannabis Day', 'Top Five Brands in Cinco de Mayo', 'Top Five Brands in Independence Day']],
+        #         value='Top Five Brands Per Holiday'
+        #     )
+        # ])
     ])
 ])
 
@@ -206,27 +206,27 @@ def top_five_reactions_per_holiday(value):
         return go.Figure(data=[pie], layout=layout)
 
 
-@app.callback(Output('top-five-reactions-per-holiday-pie', 'figure'),
-    [Input('top-five-reactions-per-holiday-drop-down', 'value')])
-
-def top_five_reactions_per_holiday(value):
-    # if value == 'Top Five Adverse Reactions in 2017':
-    if value == 'Top Five Brands in Christmas':
-        layout = go.Layout(
-            # title='Top Five Adverse Reactions Reported During Adverse Events',
-            showlegend=False,
-            margin=go.Margin(l=50, r=50, t=40, b=40)
-            )
-        pie = go.Pie(
-                labels=[reaction[0] for reaction in top_five_most_common_reactions()],
-                values=[reaction[1] for reaction in top_five_most_common_reactions()],
-                # text=['title']
-                # hoverinfo='text',
-                textinfo="label+percent"
-            )
-        return go.Figure(data=[pie], layout=layout)
-    else:
-        return None
+# @app.callback(Output('top-five-reactions-per-holiday-pie', 'figure'),
+#     [Input('top-five-reactions-per-holiday-drop-down', 'value')])
+#
+# def top_five_reactions_per_holiday(value):
+#     # if value == 'Top Five Adverse Reactions in 2017':
+#     if value == 'Top Five Brands in Christmas':
+#         layout = go.Layout(
+#             # title='Top Five Adverse Reactions Reported During Adverse Events',
+#             showlegend=False,
+#             margin=go.Margin(l=50, r=50, t=40, b=40)
+#             )
+#         pie = go.Pie(
+#                 labels=[reaction[0] for reaction in top_five_most_common_reactions()],
+#                 values=[reaction[1] for reaction in top_five_most_common_reactions()],
+#                 # text=['title']
+#                 # hoverinfo='text',
+#                 textinfo="label+percent"
+#             )
+#         return go.Figure(data=[pie], layout=layout)
+#     else:
+#         return None
 
 
 
