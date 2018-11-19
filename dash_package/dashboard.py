@@ -102,8 +102,8 @@ app.layout = html.Div(id='main', children = [
             html.Br(),
             dcc.Dropdown( # our dropdown menu
                 id = 'top-five-reactions-per-holiday-drop-down', # id referenced in routes.py function
-                options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Adverse Reactions in 2017', 'Top Five Adverse Brands in 2017']],
-                value='Top Five Adverse Reactions in 2017'
+                options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Brands in Christmas', 'Top Five Brands in Thanksgiving', 'Top Five Brands in Halloween', 'Top Five Brands in New Years Eve', 'Top Five Brands in Valentine\'s Day', 'Top Five Brands in Mardi Gras', 'Top Five Brands in Cannabis Day', 'Top Five Brands in Cinco de Mayo', 'Top Five Brands in Independence Day']],
+                value='Top Five Brands Per Holiday'
             )
         ])
     ])
@@ -211,7 +211,7 @@ def top_five_reactions_per_holiday(value):
 
 def top_five_reactions_per_holiday(value):
     # if value == 'Top Five Adverse Reactions in 2017':
-    if value == 'Top Five Adverse Reactions in 2017':
+    if value == 'Top Five Brands in Christmas':
         layout = go.Layout(
             # title='Top Five Adverse Reactions Reported During Adverse Events',
             showlegend=False,
