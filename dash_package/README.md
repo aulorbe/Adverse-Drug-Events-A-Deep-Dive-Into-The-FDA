@@ -10,3 +10,4 @@ Technologies used:
 - Dash
 - JSON
 
+*Note: you must download dashtable (https://github.com/plotly/dash-table) to work with the dashboard.py file
