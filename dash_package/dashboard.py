@@ -11,35 +11,32 @@ import plotly.graph_objs as go
 
 
 # HOW OUR DASHBOARD WILL LOOK:
-app.layout = html.Div(children=[ # children of entire html page
-    html.H1('An Exploration of the FDA\'s Adverse Events open API'), # title
-
-    html.Br(), # line breaks
-    html.Br(),
-    html.Br(),
-
-    dcc.Graph(
-        id='graph-from-dropdown',
-            ),
-
-    dcc.Dropdown( # our dropdown menu
-        id = 'holiday-drop-down', # id referenced in routes.py function
-        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths per holiday', 'Suicides per holiday', 'Attempted Suicides per Holidays']],
-        value='Deaths per holiday'
-         # options for a list of two items: 'Christmas' and 'New Years'
-    ),
-
-    dcc.Dropdown( # our dropdown menu
-        id = 'top-five-reactions-drop-down', # id referenced in routes.py function
-        options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Adverse Reactions in 2017', 'Top Five Adverse Brands in 2017']],
-        value='Top Five Adverse Reactions in 2017'
-    ),
-
-    dcc.Graph(
-        id='top-five-reactions-pie',
-        # value = 'Top Five Adverse Reactions in 2017'
+app.layout = html.Div(
+    dcc.Tabs(id="tabs", children=[
+        dcc.Tab(id='Tab 1', label='Deaths and Suicides', children=[
+            html.H1(children='Deaths and Suicides per Holiday'),
+            dcc.Graph(
+                id='graph-from-dropdown',
+                    ),
+            dcc.Dropdown( # our dropdown menu
+                id = 'holiday-drop-down', # id referenced in routes.py function
+                options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Deaths per holiday', 'Suicides per holiday', 'Attempted Suicides per Holidays']],
+                value='Deaths per holiday'
+                    )]),
+        dcc.Tab(id='Tab 2', label='Drugs Analysis', children=[
+            html.H1(children='Drug Related Adverse Events'),
+            dcc.Graph(
+                id='top-five-reactions-pie',
+                # value = 'Top Five Adverse Reactions in 2017'
+                    ),
+            dcc.Dropdown( # our dropdown menu
+                id = 'top-five-reactions-drop-down', # id referenced in routes.py function
+                options=[{'label': i, 'value': i, 'display': 'block'} for i in ['Top Five Adverse Reactions in 2017', 'Top Five Adverse Brands in 2017']],
+                value='Top Five Adverse Reactions in 2017'
             )
     ])
+    ])
+    )
 
 
 
