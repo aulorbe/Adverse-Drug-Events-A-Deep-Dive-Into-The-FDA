@@ -105,6 +105,28 @@ def top_five_reactions_count_in_one_holiday(holiday):
     return reaction_names
 
 
+def top_five_reaction_names_in_one_holiday(holiday):
+    all_reactions = db.session.query(Reactions.name).join(Reactions_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
+    counter = {}
+    for i in all_reactions:
+        if i in counter:
+            counter[i] += 1
+        else:
+            counter[i] = 1
+    sorted_list_of_tupes = sorted(counter.items(), key=operator.itemgetter(1), reverse=True)
+    output = []
+    counter_2 = 0
+    for i in sorted_list_of_tupes:
+        if counter_2 > 4:
+            break
+        output.append(i)
+        counter_2 += 1
+    reaction_names = []
+    for i in output:
+        reaction_names.append(i[0])
+
+    return reaction_names
+
 
 
 

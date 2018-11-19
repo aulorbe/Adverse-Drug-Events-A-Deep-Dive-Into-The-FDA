@@ -348,7 +348,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Christmas')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('Christmas')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Christmas')],
                 textinfo="label+percent"
             )
@@ -360,7 +360,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Thanksgiving')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('Thanksgiving')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Thanksgiving')],
                 textinfo="label+percent"
             )
@@ -372,7 +372,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Halloween')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('Halloween')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Halloween')],
                 textinfo="label+percent"
             )
@@ -384,7 +384,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('New Years Eve')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('New Years Eve')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('New Years Eve')],
                 textinfo="label+percent"
             )
@@ -396,7 +396,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Valentine\'s Day')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('Valentine\'s Day')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Valentine\'s Day')],
                 textinfo="label+percent"
             )
@@ -408,7 +408,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Mardi Gras')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('Mardi Gras')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Mardi Gras')],
                 textinfo="label+percent"
             )
@@ -420,7 +420,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Cannabis Day')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('Cannabis Day')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Cannabis Day')],
                 textinfo="label+percent"
             )
@@ -432,7 +432,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Cinco de Mayo')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('Cinco de Mayo')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Cinco de Mayo')],
                 textinfo="label+percent"
             )
@@ -444,7 +444,7 @@ def top_five_reactions_per_holiday(value):
             margin=go.Margin(l=50, r=50, t=40, b=40)
             )
         pie = go.Pie(
-                labels=[reaction for reaction in top_five_reactions_count_in_one_holiday('Independence Day')],
+                labels=[reaction for reaction in top_five_reaction_names_in_one_holiday('Independence Day')],
                 values=[reaction for reaction in top_five_reactions_count_in_one_holiday('Independence Day')],
                 textinfo="label+percent"
             )
