@@ -52,17 +52,6 @@ app.layout = html.Div(id='main', children = [
         dcc.Tab(id='Tab 3', label='Sex Breakdown', children=[
             html.Br(),
             html.P('Pick a holiday from the menu below and its stats will appear in the table.'),
-            html.Br(),
-            dcc.Dropdown(
-                id='sex-dropdown',
-                options=[
-                    {'label': 'Christmas', 'value': 'xmas'},
-                    {'label': 'Thanksgiving', 'value': 'tkgiving'},
-                    {'label': 'Halloween', 'value': 'halloween'}
-                ],
-                multi=True,
-                value="xmas"
-                ),
 
             html.Br(),
             html.Br(),
@@ -70,18 +59,60 @@ app.layout = html.Div(id='main', children = [
             dash_table.DataTable(
             id='sex-table',
             columns=[{'name': 'Male', 'id': 'col-male'}, {'name': 'Female', 'id': 'col-female'}],
-            data=[{'col-male': 9, 'col-female': 10}]
-            )
+            style_header={
+                             'backgroundColor': '#FDEAEA',
+                             'fontWeight': 'bold',
+                             'color': 'black'
+                             }
+            ),
+            html.Br(),
+            dcc.Dropdown(
+                id='sex-dropdown',
+                options=[
+                    {'label': 'Christmas', 'value': 'xmas'},
+                    {'label': 'Thanksgiving', 'value': 'tkgiving'},
+                    {'label': 'Halloween', 'value': 'halloween'},
+                    {'label': 'New Years Eve', 'value': 'NYE'},
+                    {'label': 'Valentine\'s Day', 'value': 'vday'},
+                    {'label': 'Mardi Gras', 'value': 'mardigras'},
+                    {'label': 'Cannabis Day', 'value': '420'},
+                    {'label': 'Cinco de Mayo', 'value': 'cinco'},
+                    {'label': 'Independence Day', 'value': 'fourth'},
+                    
+                ],
+                value="xmas"
+                ),
         ])
 
     ])
 
 ])
 
-# @app.callback(Output('sex-table', 'figure'),
-#                 [Input('sex-dropdown', 'value')])
-# def sex_stats_per_holiday(value):
-#     pass
+@app.callback(Output('sex-table', 'data'),
+                [Input('sex-dropdown', 'value')])
+def sex_stats_per_holiday(value):
+    if value == 'xmas':
+        return [{'col-male': male_events_in_one_holiday('Christmas'),'col-female':female_events_in_one_holiday('Christmas')}]
+    elif value =='tkgiving':
+        return [{'col-male': male_events_in_one_holiday('Thanksgiving'),'col-female':female_events_in_one_holiday('Thanksgiving')}]
+    elif value == 'halloween':
+        return [{'col-male':male_events_in_one_holiday('Halloween'),'col-female':female_events_in_one_holiday('Halloween')}]
+    elif value == 'NYE':
+        return [{'col-male':male_events_in_one_holiday('New Years Eve'),'col-female':female_events_in_one_holiday('New Years Eve')}]
+    elif value == 'vday':
+        return [{'col-male':male_events_in_one_holiday('Valentine\'s Day'),'col-female':female_events_in_one_holiday('Valentine\'s Day')}]
+    elif value == 'mardigras':
+        return [{'col-male':male_events_in_one_holiday('Mardi Gras'),'col-female':female_events_in_one_holiday('Mardi Gras')}]
+    elif value == '420':
+        return [{'col-male':male_events_in_one_holiday('Cannabis Day'),'col-female':female_events_in_one_holiday('Cannabis Day')}]
+    elif value == 'cinco':
+        return [{'col-male':male_events_in_one_holiday('Cinco de Mayo'),'col-female':female_events_in_one_holiday('Cinco de Mayo')}]
+    elif value == 'fourth':
+        return [{'col-male':male_events_in_one_holiday('Independence Day'),'col-female':female_events_in_one_holiday('Independence Day')}]
+
+
+
+#
 
 
 

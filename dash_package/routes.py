@@ -20,20 +20,12 @@ import operator
 
 
 @server.route('/q')
-def top_five_most_common_brands():
-    list_of_all_brands_in_all_events = db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).all()
-    list_of_cleaned_brands = []
-    for i in list_of_all_brands_in_all_events:
-        for y in i:
-            list_of_cleaned_brands.append(y)
-    dict_of_brands = {}
-    for i in list_of_cleaned_brands:
-        if i in dict_of_brands:
-            dict_of_brands[i] += 1
-        else:
-            dict_of_brands[i] = 1
-    sorted_list_of_tupes = sorted(dict_of_brands.items(), key=operator.itemgetter(1))
-    return str(sorted_list_of_tupes[-5:])
+def deaths_per_holiday(holiday):
+    return jsonify(db.session.query(Reactions.name).join(Reactions_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday,
+    or_(Reactions.name=='Death', Reactions.name=='Sudden death')).all())
+
+
+    # return len(db.session.query(Adverse_Events.sex).filter(Adverse_Events.sex == 1).all())
 
 # routes
 # @app.callback(Output('graph-from-dropdown', 'figure'), # output a graph

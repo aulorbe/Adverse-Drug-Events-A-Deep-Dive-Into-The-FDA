@@ -13,9 +13,25 @@ engine = create_engine('sqlite:///adverse-events.db', echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-
 def find_total_number_of_events_one_holiday(holiday): # format of holiday input = 'Christmas' format
     return db.session.query(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
+
+
+def male_events_in_one_holiday(holiday): # format of holiday input = 'Christmas' format
+    all_holidays = db.session.query(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
+    sex = []
+    for i in all_holidays:
+        if i.sex==1:
+            sex.append(i)
+    return len(sex)
+
+def female_events_in_one_holiday(holiday): # format of holiday input = 'Christmas' format
+    all_holidays = db.session.query(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
+    sex = []
+    for i in all_holidays:
+        if i.sex==2:
+            sex.append(i)
+    return len(sex)
 
 
 def find_all_brands_in_one_holiday(holiday):
