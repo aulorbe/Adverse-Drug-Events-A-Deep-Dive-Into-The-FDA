@@ -39,6 +39,7 @@ def find_all_brands_in_one_holiday(holiday):
     return db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
 
 
+
 def find_count_of_brands_in_one_holiday(holiday):
     return len(db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all())
 

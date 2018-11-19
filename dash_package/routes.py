@@ -20,8 +20,27 @@ import operator
 
 
 @server.route('/q')
-def deaths_per_holiday():
-    return str(find_count_of_brands_in_one_holiday('Christmas'))
+def find_all_brands_in_one_holiday():
+    all_brands = db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name=='Christmas').all()
+    counter = {}
+    for i in all_brands:
+        if i in counter:
+            counter[i] += 1
+        else:
+            counter[i] = 1
+    sorted_list_of_tupes = sorted(counter.items(), key=operator.itemgetter(1), reverse=True)
+    output = []
+    counter_2 = 0
+    for i in sorted_list_of_tupes:
+        if counter_2 > 4:
+            break
+        output.append(i)
+        counter_2 += 1
+    return str(output)
+
+
+
+
 
 
     # return len(db.session.query(Adverse_Events.sex).filter(Adverse_Events.sex == 1).all())
