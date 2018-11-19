@@ -38,6 +38,52 @@ def female_events_in_one_holiday(holiday): # format of holiday input = 'Christma
 def find_all_brands_in_one_holiday(holiday):
     return db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
 
+def top_five_brands_names_in_one_holiday(holiday):
+    all_brands = db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
+    counter = {}
+    for i in all_brands:
+        if i in counter:
+            counter[i] += 1
+        else:
+            counter[i] = 1
+    sorted_list_of_tupes = sorted(counter.items(), key=operator.itemgetter(1), reverse=True)
+    output = []
+    counter_2 = 0
+    for i in sorted_list_of_tupes:
+        if counter_2 > 4:
+            break
+        output.append(i)
+        counter_2 += 1
+    brand_names = []
+    for i in output:
+        brand_names.append(i[0])
+
+    return brand_names
+
+def top_five_brands_count_in_one_holiday(holiday):
+    all_brands = db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
+    counter = {}
+    for i in all_brands:
+        if i in counter:
+            counter[i] += 1
+        else:
+            counter[i] = 1
+    sorted_list_of_tupes = sorted(counter.items(), key=operator.itemgetter(1), reverse=True)
+    output = []
+    counter_2 = 0
+    for i in sorted_list_of_tupes:
+        if counter_2 > 4:
+            break
+        output.append(i)
+        counter_2 += 1
+    brand_names = []
+    for i in output:
+        brand_names.append(i[1])
+
+    return brand_names
+
+
+
 
 
 def find_count_of_brands_in_one_holiday(holiday):

@@ -190,6 +190,28 @@ def top_five_reactions_per_holiday(value):
         return go.Figure(data=[pie], layout=layout)
 
 
+@app.callback(Output('top-five-reactions-per-holiday-pie', 'figure'),
+    [Input('top-five-reactions-per-holiday-drop-down', 'value')])
+
+def top_five_reactions_per_holiday(value):
+    # if value == 'Top Five Adverse Reactions in 2017':
+    if value == 'Top Five Adverse Reactions in 2017':
+        layout = go.Layout(
+            # title='Top Five Adverse Reactions Reported During Adverse Events',
+            showlegend=False,
+            margin=go.Margin(l=50, r=50, t=40, b=40)
+            )
+        pie = go.Pie(
+                labels=[reaction[0] for reaction in top_five_most_common_reactions()],
+                values=[reaction[1] for reaction in top_five_most_common_reactions()],
+                # text=['title']
+                # hoverinfo='text',
+                textinfo="label+percent"
+            )
+        return go.Figure(data=[pie], layout=layout)
+    else:
+        return None
+
 
 
         # return None # else return nothing (but automatically defaults to outputting a graph because of our decorator so just outputs a blank graph)
