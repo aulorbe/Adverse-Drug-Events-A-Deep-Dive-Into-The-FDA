@@ -20,9 +20,20 @@ app.layout = html.Div(id='main', children = [
 
 
     # INTRODUCTORY TEXT
-    html.P('This web application allows users to explore a database comprising of adverse event information across select holidays in 2017. An adverse event is a drug related event that resulted the user to visit a hospital. Everything in the database was gathered by querying the FDA\'s API Drug Adverse Event endpoint.'),
-    html.P('Each holiday has a sample size of drug related adverse events. The holiday with the largest sample size of adverse events from the FDA API was Cannabis Day with 5242 reported adverse events. Men make up 40.86% of total events, while women make up 59.14% of total events.'),
-    html.P('What were the most common drugs throughout the holidays? What were the most common reactions? Which holidays had the most deaths, suicides and attempted suicides? Below is the analysis of adverse events of the holidays that help answer these questions:'),
+    html.P('This web application allows users to explore the adverse events reported to the FDA across select holidays in 2017. An adverse event is any symptom that occurs while taking a drug, which may or may not have been caused by the drug. Everything in the database was gathered by querying the FDA\'s API Drug Adverse Events endpoint.'),
+    html.P(html.Strong('Some observations of note:'),),
+    html.Ul(children=[
+        html.Li('The holiday with highest number of adverse events reported to the FDA was Cannabis Day (5,242).'),
+        html.Li('Across all the holidays in this dataset, men made up 40.86% of total adverse events, while women made up 59.14% of total adverse events. We plan to do a gender analysis at a later point.')
+        ]
+        ),
+    html.P(html.Strong('Some questions we tried to answer with our app include:'),),
+    html.Ul(children=[
+        html.Li('What were the most common drugs involved with adverse events during the holidays?'),
+        html.Li('What were the most common reactions reported during adverse sevents?'),
+        html.Li('Which holidays had the most deaths, suicides, and attempted suicides?')
+        ]
+    ),
     html.Br(),
 
     # STARTING TABS SECTION
@@ -500,6 +511,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
     elif value == 'tkgiving':
@@ -509,6 +521,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
     elif value == 'halloween':
@@ -518,6 +531,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
     elif value == 'NYE':
@@ -527,6 +541,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
     elif value == 'vday':
@@ -536,6 +551,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
     elif value == 'mardigras':
@@ -545,6 +561,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
     elif value == '420':
@@ -554,6 +571,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
     elif value == 'cinco':
@@ -563,6 +581,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
     elif value == 'fourth':
@@ -572,6 +591,7 @@ def render_content(value): #we pass in a value from the dropdown menu in dashboa
                 ],
         'layout': {
             'title': 'Gender Analysis per Holiday',
+            'showlegend':False
             }
             }
 
