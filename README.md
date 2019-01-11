@@ -11,31 +11,17 @@ Some questions that our app might help answers include:
 - What were the most common reactions reported during Adverse Events?
 - On which holidays were the most deaths, suicides, and attempted suicides reported?
 
-### Gathering The Data
+## Gathering The Data
+To collect the data that populated our database, we queried the [FDA's API Drug Adverse Events endpoint](https://open.fda.gov/apis/drug/event/). This data was quite messy and included duplicate values in different fields, different structures for the same data, and clearly-impossible values for certain fields (e.g. 1000+ numbers for some ages). Cleaning the data and getting it into a workable format took the vast majority of our time. We attribute the state of the data to the fact that any medical professional can report AEs to the FDA, which introduces human error into the data.
 
-### Data Munging
+## Building The Database
+After we got our data into a workable state, we then used [SQLAlchemy](https://www.sqlalchemy.org/) to store it in a proper database (you can view the code for that in the [models.py](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/dash_package/models.py) file).  Because we wanted to focus on the narrative that users could create among drugs, drug brands, reported reactions, and holidays, we create six tables. Of these six, we had an association table as well as multiple tables modeling one:many and many:many relationships.
 
-
-
-
-
-
+## Constructing The Queries
 
 
+## Creating The Visualizations
 
+## Deployment
 
-
-
-
-
-
-
-
-
-
-
-1. Intro + problem statement + question we’re trying answer
-2. Getting, cleaning, organizing the data
-3. Creating the queries & SQLAlchemy
-4. Making the visualizations & Flask/Dash
-5. What we learned / plans for future development
+## Future Plans

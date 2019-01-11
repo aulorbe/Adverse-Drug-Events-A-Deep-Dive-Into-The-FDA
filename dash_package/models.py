@@ -8,7 +8,7 @@ from dash_package.__init__ import db
 class Adverse_Events(db.Model): #association table
     __tablename__ = 'events'
     id = Column(db.Integer, primary_key = True)
-    sex = Column(db.Integer) #should we do int or text here?
+    sex = Column(db.Integer)
     age = Column(db.Integer)
 
     brands = relationship('Brands', secondary = 'brands_events', back_populates='events')
