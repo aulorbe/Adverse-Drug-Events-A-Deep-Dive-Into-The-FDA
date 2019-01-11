@@ -93,7 +93,7 @@ app.layout = html.Div(id='main', children = [
             ]),
 
         # TAB 2
-        dcc.Tab(id='Tab 2', label='Top 5 Brands & Drugs Associated With Adverse Events Across All Holidays', children=[
+        dcc.Tab(id='Tab 2', label='Top 5 Brands & Reactions Associated With Adverse Events Across All Holidays', children=[
             # html.H1(children='Drug Related Adverse Events'),
             html.Br(),
 
