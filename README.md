@@ -20,11 +20,14 @@ To collect the data that populated our database, we queried the [FDA's API Drug 
 After we got our data into a workable state, we then used [SQLAlchemy](https://www.sqlalchemy.org/) to store it in a proper database (you can view the code for that in the [models.py](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/dash_package/models.py) file).  Because we wanted to focus on the narrative that users could create among drugs, drug brands, reported reactions, and holidays, we create six tables. Of these six, we had an association table as well as multiple tables modeling one:many and many:many relationships.
 
 ## Constructing The Queries
-
+We then created the queries.py file to store all our query commands in order to pull data from our database. These queries include the number of adverse events for a given holiday or the top five reactions for a specific holiday that was choosen in the front end. 
 
 ## Creating The Visualizations
+In order to have a visual analysis of the data, we created several pie charts and graphs to display our data. This was written in HTML to be displayed in the Flask app. We found astonishing results and insights from our pie charts and graphs. We found that auto-immune disease medication came up frequently across all holidays as an adverse events. 
 ![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_five_reactions_christmas.png)
-## Deployment
+![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_brands_reactions_all_holidays.png)
 
+## Deployment
+After creating our visualizations we set up to run our server through the run.py file in order to deply the Flask app. 
 ## Future Plans
 
