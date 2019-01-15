@@ -21,9 +21,8 @@ After we got our data into a workable state, we then used [SQLAlchemy](https://w
 
 
 ## Creating The Visualizations
-
+![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_five_reactions_christmas.png)
 ## Deployment
 
 ## Future Plans
 
-![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_five_reactions_christmas.png)
