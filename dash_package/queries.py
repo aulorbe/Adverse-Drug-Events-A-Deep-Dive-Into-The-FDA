@@ -6,9 +6,6 @@ import operator
 from dash_package.models import Adverse_Events, Brands, Brands_Events, Reactions, Reactions_Events, Holidays
 
 
-
-
-
 engine = create_engine('sqlite:///adverse-events.db', echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -16,7 +13,6 @@ session = Session()
 def find_total_number_of_events_one_holiday(holiday): # format of holiday input = 'Christmas' format
     all = db.session.query(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
     return len(all)
-
 
 def male_events_in_one_holiday(holiday): # format of holiday input = 'Christmas' format
     all_holidays = db.session.query(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
@@ -33,7 +29,6 @@ def female_events_in_one_holiday(holiday): # format of holiday input = 'Christma
         if i.sex==2:
             sex.append(i)
     return len(sex)
-
 
 def find_all_brands_in_one_holiday(holiday):
     return db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
@@ -128,30 +123,16 @@ def top_five_reaction_names_in_one_holiday(holiday):
     return reaction_names
 
 
-
-
 def find_count_of_brands_in_one_holiday(holiday):
     return len(db.session.query(Brands.name).join(Brands_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all())
 
 
 def find_all_reactions_in_one_holiday(holiday):
     return  db.session.query(Reactions.name).join(Reactions_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all()
-#
-#
+
+
 def find_count_of_reactions_in_one_holiday(holiday):
     return  len(db.session.query(Reactions.name).join(Reactions_Events).join(Adverse_Events).join(Holidays).filter(Holidays.name==holiday).all())
-
-# def average_age_of_all_events():
-#     age_results = session.query(Adverse_Events.age).filter(Adverse_Events.age != 'None').all()
-#     list_of_ages = []
-#     for i in age_results:
-#         for y in i:
-#             list_of_ages.append(y)
-#     for i in list_of_ages:
-#     #     if i > 24:
-    #         list_of_ages.remove(i)
-    # return list_of_ages
-    # round(80.23456, 2)
 
 def men():
     return len(db.session.query(Adverse_Events.sex).filter(Adverse_Events.sex == 1).all())
@@ -284,36 +265,3 @@ def death_top_five_brands():
             dict_of_brands[i] = 1
     sorted_list_of_tupes = sorted(dict_of_brands.items(), key=operator.itemgetter(1))
     return sorted_list_of_tupes[-5:]
-
-
-
-
-# def holiday_with_most_males():
-#     pass
-
-# def holiday_with_most_females():
-#     pass
-#
-# def holiday_with_oldest_person():
-#     pass
-#
-# def holiday_with_youngest_person():
-#     pass
-
-# def men_and_women_per_holiday(holiday):
-#     pass
-#
-# def age_groups_per_holiday(holiday):
-#     pass
-
-# def find_all_sex():
-#     return session.query(Adverse_Events.sex).all()
-#
-# def find_all_age():
-#     return session.query(Adverse_Events.age).all()
-#
-# def find_how_many_female():
-#     return session.query(Adverse_Events).filter_by(Adverse_Events.age = 1).all()
-#
-# def find_how_many_male():
-#     return session.query(Adverse_Events).filter_by(Adverse_Events.age = 2).all()
