@@ -27,7 +27,8 @@ In order to have a visual analysis of the data, we created several pie charts an
 Here is what we found: We found that auto-immune disease medication came up frequently across all holidays as an adverse events. 
 
 ### Top Five Reactions on Christmas
-![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_christmas.png)
+
+TL;DR ![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_christmas.png)
 
 ### Top Five Brands that came up on Christmas 
 ![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_brands_christmas.png)
