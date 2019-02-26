@@ -1,6 +1,10 @@
 # Beyond The FDA: Drug-Related Adverse Events in 2017
 
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4FnveHiDEYk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
 ## Introduction
 We have built an exploratory web application (via Flask & Dash) that allows users to get information about FDA-regulated drugs (and their reactions) that were involved in "Adverse Events" reported to the FDA across different US holidays in 2017. Users are able to choose statistics and visualizations generated from a pre-defined set of SQLAlchemy queries.
 
