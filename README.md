@@ -32,7 +32,7 @@ Here is what we found: We found that auto-immune disease medication came up freq
 
 ### Top Five Brands that came up on Christmas 
 <p align="center">
-  <img width="560" height="560" src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_brands_christmas.png">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_brands_christmas.png">
 </p>
 
 
