@@ -26,19 +26,39 @@ We then created queries (in the queries.py file) for the frontend of our app. Us
 In order to have a visual analysis of the data, we created several pie charts and graphs to display our data. This was written in HTML to be displayed in the Flask app. We found astonishing results and insights from our pie charts and graphs.
 Here is what we found: We found that auto-immune disease medication came up frequently across all holidays as an adverse events.
 
-### Top Five Reactions on Christmas
-
+### Example of Top Five Reactions of one Holiday
+We found that death had the most reactions on Christmas making up 28.4% of drug related events while drug ineffectiveness made up 25.1% of the drug related events. Interestingly off-label use made up the third most of drug related events at 19.4%.
 <p align="center">
-  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_christmas.png">
+  <img width="600" height="600" src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_christmas.png">
 </p>
 
 
-### Top Five Brands that came up on Christmas
-
+### Top Five Brands of one Holiday
+We found that Enbrel, which treats autoimmune diseases, came up the most at 57.8% of hospital visits. Cosentyx came up the second most at 11.8% which is used to treat moderate to severe plaque psoriasis.
 <p align="center">
   <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_brands_christmas.png">
 </p>
 
+### Top Five Adverse Brands Across All Holiday
+We used SQL-Alchemy to aggregate
+<p align="center">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_brands_all_holidays.png">
+</p>
+
+### Top Five Reactions Brands Across All Holiday
+<p align="center">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_all_holidays.png">
+</p>
+
+### Death and Suicides Across All Holiday
+<p align="center">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/deaths_and_suicides_with_bottomtab.png">
+</p>
+
+### Gender Analysis per Holiday
+<p align="center">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/gender_analysis.png">
+</p>
 
 ## Deployment
 We deployed our app (via the [run.py file](https://github.com/aulorbe/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA./blob/master/run.py)) through Flask and rendered our visualizations on the frontend with Dash. Rendering everything for the user was the last step in the construction of our ETL pipeline.
