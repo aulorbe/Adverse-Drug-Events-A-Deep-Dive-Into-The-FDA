@@ -42,22 +42,22 @@ We found that Enbrel, which treats autoimmune diseases, came up the most at 57.8
 ### Top Five Adverse Brands Across All Holiday
 We used SQL-Alchemy to aggregate 
 <p align="center">
-  <img src="top_5_brands_all_holidays.png">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_brands_all_holidays.png">
 </p>
 
 ### Top Five Reactions Brands Across All Holiday
 <p align="center">
-  <img src="top_5_reactions_all_holidays.png">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_all_holidays.png">
 </p>
 
 ### Death and Suicides Across All Holiday
 <p align="center">
-  <img src="deaths_and_suicides_with_bottomtab.png">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/deaths_and_suicides_with_bottomtab.png">
 </p>
 
 ### Gender Analysis per Holiday
 <p align="center">
-  <img src="gender_analysis.png">
+  <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/gender_analysis.png">
 </p>
 
 ## Deployment
