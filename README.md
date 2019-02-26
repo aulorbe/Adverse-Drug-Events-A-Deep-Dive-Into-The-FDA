@@ -2,7 +2,7 @@
 
 
 ## Introduction
-We have built an exploratory web application (via Flask & Dash) that allows users to get information about FDA-regulated drugs (and their reactions) that were involved in "Adverse Events" reported to the FDA across different US holidays in 2017. Users are able to choose statistics and visualizations generated from a pre-defined set of SQLAlchemy queries.
+We have built an exploratory web application (via [Flask](http://flask.pocoo.org/) & [Dash](https://dash.plot.ly/)) that allows users to get information about FDA-regulated drugs (and their reactions) that were involved in "Adverse Events" reported to the FDA across different US holidays in 2017. Users are able to choose statistics and visualizations generated from a pre-defined set of SQLAlchemy queries.
 
 The [FDA](https://fis.fda.gov/extensions/fpdwidgets/2e01da82-13fe-40e0-8c38-4da505737e36.html) defines Adverse Events (AE) as "...any symptom that occurs while taking a drug, which may or may not have been caused by the drug. This is different from an adverse drug reaction (ADR), where there is specific evidence that the AE is related to the drug. A side effect is the same as an ADR. As a result, ADR is always an AE, but an AE may or may not be an ADR."
 
@@ -23,12 +23,12 @@ After we got our data into a workable state, we then used [SQLAlchemy](https://w
 We then created queries (in the queries.py file) for the frontend of our app. Users could use drop-down menus to view the outputs of select queries. These queries included the number of adverse events for a given holiday or the top five reactions for a specific holiday that was choosen on the front end. 
 
 ## Creating The Visualizations
-For visualizations, we created several pie charts and graphs. These were written in HTML and displayed via Flask and Dash. One interesting find generated from our visual analyses was that auto-immune disease medications came up frequently across all holidays as being involved in adverse events. 
+For visualizations, we created several pie charts and graphs. These were written in HTML and displayed via Dash. One interesting find generated from our visual analyses was that auto-immune disease medications came up frequently across all holidays as being involved in adverse events. 
 ![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_five_reactions_christmas.png)
 ![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_brands_reactions_all_holidays.png)
 
 ## Deployment
-After creating our visualizations we set up to run our server through the run.py file in order to deply the Flask app.
+We deployed our app (via the [run.py file](https://github.com/aulorbe/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA./blob/master/run.py)) through Flask and rendered our visualizations on the frontend with Dash. Rendering everything for the user was the last step in the construction of our ETL pipeline.
 
 ## Future Plans
-In the future, we hope to build a website to host our app, so that users don't have to run the code themselves in order to interact with it.
+In the future, we hope to build a website to host our app, so that users don't have to run the code themselves in order to view the final product.
