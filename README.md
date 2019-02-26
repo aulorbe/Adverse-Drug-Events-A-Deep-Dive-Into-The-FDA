@@ -23,9 +23,14 @@ After we got our data into a workable state, we then used [SQLAlchemy](https://w
 We then created the queries.py file to store all our query commands in order to pull data from our database. These queries include the number of adverse events for a given holiday or the top five reactions for a specific holiday that was choosen in the front end. 
 
 ## Creating The Visualizations
-In order to have a visual analysis of the data, we created several pie charts and graphs to display our data. This was written in HTML to be displayed in the Flask app. We found astonishing results and insights from our pie charts and graphs. We found that auto-immune disease medication came up frequently across all holidays as an adverse events. 
-![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_five_reactions_christmas.png)
-![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_brands_reactions_all_holidays.png)
+In order to have a visual analysis of the data, we created several pie charts and graphs to display our data. This was written in HTML to be displayed in the Flask app. We found astonishing results and insights from our pie charts and graphs.
+Here is what we found: We found that auto-immune disease medication came up frequently across all holidays as an adverse events. 
+
+### Top Five Reactions on Christmas
+![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_christmas.png)
+
+### Top Five Brands that came up on Christmas 
+![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_brands_christmas.png)
 
 ## Deployment
 After creating our visualizations we set up to run our server through the run.py file in order to deply the Flask app. 
