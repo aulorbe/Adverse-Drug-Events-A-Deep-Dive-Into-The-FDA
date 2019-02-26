@@ -28,10 +28,10 @@ Here is what we found: We found that auto-immune disease medication came up freq
 
 ### Top Five Reactions on Christmas
 
-TL;DR ![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_christmas.png)
+![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_christmas.png)
 
 ### Top Five Brands that came up on Christmas 
-![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_brands_christmas.png)
+<p align="center"> ![alt text](https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_brands_christmas.png) </p>
 
 ## Deployment
 After creating our visualizations we set up to run our server through the run.py file in order to deply the Flask app. 
