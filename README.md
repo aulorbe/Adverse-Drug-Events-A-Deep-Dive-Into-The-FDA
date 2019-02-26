@@ -27,7 +27,7 @@ In order to have a visual analysis of the data, we created several pie charts an
 Here is what we found: We found that auto-immune disease medication came up frequently across all holidays as an adverse events. 
 
 ### Top Five Reactions on Christmas
-
+We found that death had the most reactions on Christmas making up 28.4% of drug related events while drug ineffectiveness made up 25.1% of the drug related events. Interestingly off-label use made up the third most of drug related events at 19.4%.
 <p align="center">
   <img src="https://github.com/anthonytapias/Adverse-Drug-Events-A-Deep-Dive-Into-The-FDA/blob/master/img/top_5_reactions_christmas.png">
 </p>
